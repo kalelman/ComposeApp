@@ -36,7 +36,11 @@ fun GmeScreen() {
             modifier = Modifier.weight(9f)
         ) {
             Text(stringResource(R.string.instruction_text))
-            Text(stringResource(R.string.target_value_text), fontSize = 32.sp, fontWeight = FontWeight.Bold)
+            Text(
+                stringResource(R.string.target_value_text),
+                fontSize = 32.sp,
+                fontWeight = FontWeight.Bold
+            )
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
