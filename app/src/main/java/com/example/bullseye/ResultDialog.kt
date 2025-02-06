@@ -8,13 +8,14 @@ import androidx.compose.ui.res.stringResource
 fun ResultDialog(
     modifier: Modifier = Modifier,
     sliderValue: Int,
+    points: Int,
     onConfirm: () -> Unit,
     onDismiss: () -> Unit
 ) {
     BasicAlertDialog(
         modifier = modifier,
         title = stringResource(id = R.string.result_dialog_title),
-        message = stringResource(id = R.string.result_dialog_message, sliderValue),
+        message = stringResource(id = R.string.result_dialog_message, sliderValue, points),
         confirmButtonText = stringResource(id = R.string.result_dialog_button_text),
         onConfirm = onConfirm,
         onDismiss = onDismiss

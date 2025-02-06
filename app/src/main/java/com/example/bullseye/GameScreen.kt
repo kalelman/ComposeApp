@@ -19,13 +19,23 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.bullseye.ui.theme.BullseyeTheme
+import kotlin.math.abs
+import kotlin.random.Random
 
 @Composable
 fun GmeScreen() {
     var alertIsVisible by rememberSaveable { mutableStateOf(false) }
     var sliderValue by rememberSaveable { mutableStateOf(0.5f) }
+    var targetValue by rememberSaveable { mutableStateOf(Random.nextInt(1, 100)) }
 
     val sliderToInt = (sliderValue * 100).toInt()
+
+    fun pointsForCurrentRound(): Int {
+        val maxScore = 100
+        val difference = abs(targetValue - sliderToInt)
+
+        return maxScore - difference
+    }
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -40,7 +50,7 @@ fun GmeScreen() {
             verticalArrangement = Arrangement.SpaceEvenly,
             modifier = Modifier.weight(9f)
         ) {
-            GamePrompt()
+            GamePrompt(targetValue = targetValue)
             TargetSlider(
                 value = sliderValue,
                 valueChanged = { value -> sliderValue = value }
@@ -63,7 +73,8 @@ fun GmeScreen() {
                     alertIsVisible = false
                     Log.i("ALERT VISIBLE?", alertIsVisible.toString())
                 },
-                sliderValue = sliderToInt
+                sliderValue = sliderToInt,
+                points = pointsForCurrentRound()
             )
         }
     }
